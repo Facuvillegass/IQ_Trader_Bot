@@ -1,0 +1,14 @@
+{
+  "name": "iq-trader-bot",
+  "private": true,
+  "version": "1.0.0",
+  "description": "MNQ paper trading / forward testing system",
+  "scripts": {
+    "start": "./start.sh",
+    "stop": "./stop.sh",
+    "test": ".venv/bin/python -m pytest backend/tests -q",
+    "sanity": ".venv/bin/python backend/scripts/sanity_check.py",
+    "dashboard": "npm --prefix frontend run dev",
+    "api": "PYTHONPATH=. .venv/bin/python -m backend.app.main"
+  }
+}

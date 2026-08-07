@@ -1,0 +1,19 @@
+# Fallback if Railway ever ignores Dockerfile.
+# Prefer Dockerfile (see railway.json).
+
+[phases.setup]
+nixPkgs = ["python312", "nodejs_22"]
+
+[phases.install]
+cmds = [
+  "pip install -r requirements.txt",
+  "cd frontend && npm ci && npm run build && cd .."
+]
+
+[start]
+cmd = "python -m backend.app.main"
+
+[variables]
+PYTHONPATH = "."
+TRADING_MODE = "PAPER"
+EMBED_WORKER = "true"

@@ -1,0 +1,19 @@
+fastapi>=0.116.0
+uvicorn[standard]>=0.35.0
+pydantic>=2.11.0
+pydantic-settings>=2.10.0
+python-dotenv>=1.1.0
+httpx>=0.28.0
+numpy>=2.2.0
+pandas>=2.2.0
+pytest>=8.4.0
+pytest-asyncio>=1.0.0
+websockets>=15.0.0
+yfinance>=0.2.60
+apscheduler>=3.11.0
+python-dateutil>=2.9.0
+pytz>=2025.2
+aiosqlite>=0.21.0
+
+# Optional — install when using DATA_PROVIDER=databento
+# May not yet support bleeding-edge Python (e.g. 3.14). See requirements-databento.txt
