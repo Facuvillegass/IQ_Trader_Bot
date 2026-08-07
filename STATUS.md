@@ -20,8 +20,9 @@ Updated: 2026-08-07
 
 ## IN PROGRESS
 
-- [ ] Push a GitHub `Facuvillegass/IQ_Trader_Bot` (si el remoto aún no existe)
 - [ ] Deploy Railway (requiere tu login + volume + API key)
+
+Repo: https://github.com/Facuvillegass/IQ_Trader_Bot
 
 ## BLOCKED (humano)
 

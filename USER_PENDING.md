@@ -28,7 +28,7 @@ EMBED_WORKER=true
 ```
 
 - [ ] Añadir un **Volume** montado en `/data` (Settings → Volumes → Mount path `/data`)
-- [ ] Conectar el repo GitHub `Facuvillegass/IQ_Trader_Bot` y Deploy
+- [ ] Conectar el repo GitHub [Facuvillegass/IQ_Trader_Bot](https://github.com/Facuvillegass/IQ_Trader_Bot) y Deploy
 - [ ] Abrir la URL pública → `/health` debe decir `"status": "healthy"` o `"starting"` y después healthy
 - [ ] Confirmar `numReplicas = 1` (ya viene en `railway.json`; no lo subas a 2)
 
