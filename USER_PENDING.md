@@ -1,20 +1,26 @@
 # USER PENDING
 
-Solo lo que **vos** tenés que hacer. El código, Docker, lock, watchdog y health ya están listos.
+Solo lo que **vos** tenés que hacer.
 
 ---
 
-## Railway 24/7 (objetivo)
+## Listo de tu lado (parcial)
 
-- [ ] Crear cuenta en [Railway](https://railway.app) (login con GitHub `Facuvillegass`)
-- [ ] Crear cuenta en [Databento](https://databento.com) y copiar la API key
-- [ ] En Railway → tu proyecto `iq-trader-bot` → Variables, pegar:
+- [x] GitHub sync: repo [Facuvillegass/IQ_Trader_Bot](https://github.com/Facuvillegass/IQ_Trader_Bot) en `main` (código pusheado)
+- [x] Databento API key recibida (guardada en `.env` local — **no** en git)
+
+## Falta (bloquea el 24/7)
+
+- [ ] Login en Railway: https://railway.app → **Login with GitHub** (`Facuvillegass`)
+- [ ] En esta Mac (opcional pero útil): `railway login` en Terminal
+- [ ] New Project → Deploy from GitHub → elegir `IQ_Trader_Bot`
+- [ ] Variables (pegar en Railway → Variables):
 
 ```
 TRADING_MODE=PAPER
 DATA_PROVIDER=databento
-DATABENTO_API_KEY=pegá_tu_key
-DATA_API_KEY=pegá_tu_key
+DATABENTO_API_KEY=<tu key de Databento>
+DATA_API_KEY=<tu key de Databento>
 DATABASE_PATH=/data/trading.db
 LOG_DIR=/data/logs
 REPORTS_DIR=/data/reports
@@ -27,29 +33,10 @@ SLIPPAGE_TICKS=1
 EMBED_WORKER=true
 ```
 
-- [ ] Añadir un **Volume** montado en `/data` (Settings → Volumes → Mount path `/data`)
-- [ ] Conectar el repo GitHub [Facuvillegass/IQ_Trader_Bot](https://github.com/Facuvillegass/IQ_Trader_Bot) y Deploy
-- [ ] Abrir la URL pública → `/health` debe decir `"status": "healthy"` o `"starting"` y después healthy
-- [ ] Confirmar `numReplicas = 1` (ya viene en `railway.json`; no lo subas a 2)
+- [ ] Volume: Settings → Volumes → Mount path **`/data`**
+- [ ] Generate Domain → abrir `/health` y confirmar `healthy`
+- [ ] Replicas = 1 (ya viene en `railway.json`)
 
----
+## Seguridad
 
-## Si todavía no hay Databento
-
-Podés deployar igual con:
-
-```
-DATA_PROVIDER=mock
-```
-
-El worker corre 24/7 y el dashboard funciona. Cambiá a `databento` cuando tengas la key y redeploy.
-
----
-
-## No hace falta que hagas
-
-- Escribir Dockerfile / Procfile / railway.json
-- Configurar SMA, band, slippage o comisiones
-- Instalar Python/Node en Railway
-- Activar live trading
-- Crear la base de datos
+La API key se pegó en el chat. Si el repo es público, **no** la subas al código. Si querés rotarla: Databento portal → regenerar key → actualizar Railway Variables.

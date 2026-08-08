@@ -28,8 +28,10 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt requirements-databento.txt ./
+# Python 3.12 image — Databento is required in production
 RUN pip install --no-cache-dir -r requirements.txt \
-    && pip install --no-cache-dir -r requirements-databento.txt || true
+    && pip install --no-cache-dir -r requirements-databento.txt \
+    && python -c "import databento; print('databento OK', databento.__version__)"
 
 COPY backend ./backend
 COPY start.sh stop.sh ./
