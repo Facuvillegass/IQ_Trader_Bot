@@ -11,6 +11,7 @@ import {
 } from 'recharts'
 import './App.css'
 import { formatAr, formatArShort } from './time.js'
+import Chucru from './Chucru.jsx'
 
 const API = import.meta.env.VITE_API_URL || ''
 
@@ -37,42 +38,7 @@ function Metric({ label, value }) {
   )
 }
 
-export default function App() {
-  const [state, setState] = useState(null)
-  const [equity, setEquity] = useState([])
-  const [error, setError] = useState('')
-
-  useEffect(() => {
-    let alive = true
-    async function load() {
-      try {
-        const [sRes, eRes] = await Promise.all([
-          fetch(`${API}/api/state`),
-          fetch(`${API}/api/equity`),
-        ])
-        if (!sRes.ok) throw new Error(`API ${sRes.status}`)
-        const s = await sRes.json()
-        const e = eRes.ok ? await eRes.json() : []
-        if (!alive) return
-        setState(s)
-        setEquity(e)
-        setError('')
-      } catch (err) {
-        if (!alive) return
-        setError(
-          'No se puede conectar al backend. Si estás en local, corré ./start.sh. ' +
-            String(err.message || err),
-        )
-      }
-    }
-    load()
-    const id = setInterval(load, 5000)
-    return () => {
-      alive = false
-      clearInterval(id)
-    }
-  }, [])
-
+function Desk({ state, equity, error }) {
   const markers = useMemo(
     () =>
       equity.filter(
@@ -88,7 +54,7 @@ export default function App() {
   const trades = state?.trades || []
 
   return (
-    <div>
+    <>
       <header className="topbar">
         <div>
           <div className="muted" style={{ marginBottom: 6 }}>
@@ -262,6 +228,71 @@ export default function App() {
         {' · '}
         Strategy frozen: SMA 4750 / Band 50 / LONG only / On bar close
       </p>
+    </>
+  )
+}
+
+export default function App() {
+  const [tab, setTab] = useState('desk')
+  const [state, setState] = useState(null)
+  const [equity, setEquity] = useState([])
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    let alive = true
+    async function load() {
+      try {
+        const [sRes, eRes] = await Promise.all([
+          fetch(`${API}/api/state`),
+          fetch(`${API}/api/equity`),
+        ])
+        if (!sRes.ok) throw new Error(`API ${sRes.status}`)
+        const s = await sRes.json()
+        const e = eRes.ok ? await eRes.json() : []
+        if (!alive) return
+        setState(s)
+        setEquity(e)
+        setError('')
+      } catch (err) {
+        if (!alive) return
+        setError(
+          'No se puede conectar al backend. Si estás en local, corré ./start.sh. ' +
+            String(err.message || err),
+        )
+      }
+    }
+    load()
+    const id = setInterval(load, 5000)
+    return () => {
+      alive = false
+      clearInterval(id)
+    }
+  }, [])
+
+  return (
+    <div>
+      <nav className="app-tabs" aria-label="Secciones">
+        <button
+          type="button"
+          className={tab === 'desk' ? 'app-tab active' : 'app-tab'}
+          onClick={() => setTab('desk')}
+        >
+          Desk
+        </button>
+        <button
+          type="button"
+          className={tab === 'chucru' ? 'app-tab active' : 'app-tab'}
+          onClick={() => setTab('chucru')}
+        >
+          Chucru
+        </button>
+      </nav>
+
+      {tab === 'desk' ? (
+        <Desk state={state} equity={equity} error={error} />
+      ) : (
+        <Chucru />
+      )}
     </div>
   )
 }

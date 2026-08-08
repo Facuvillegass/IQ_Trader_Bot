@@ -6,6 +6,37 @@
   margin-bottom: 28px;
 }
 
+.app-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 10px;
+}
+
+.app-tab {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-family: Syne, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.app-tab:hover {
+  color: var(--ink);
+}
+
+.app-tab.active {
+  color: var(--ink);
+  background: var(--panel);
+  border-color: var(--line);
+  box-shadow: var(--shadow);
+}
+
 .brand {
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   font-weight: 800;
