@@ -1,42 +1,32 @@
 # USER PENDING
 
-Solo lo que **vos** tenés que hacer.
+Casi todo está hecho. El sistema **ya corre 24/7 en Railway**.
 
 ---
 
-## Listo de tu lado (parcial)
+## Hecho
 
-- [x] GitHub sync: repo [Facuvillegass/IQ_Trader_Bot](https://github.com/Facuvillegass/IQ_Trader_Bot) en `main` (código pusheado)
-- [x] Databento API key recibida (guardada en `.env` local — **no** en git)
+- [x] Railway account: Facundo Villegas (`facundovillegas746@gmail.com`)
+- [x] GitHub sync: [Facuvillegass/IQ_Trader_Bot](https://github.com/Facuvillegass/IQ_Trader_Bot) → servicio `IQ_Trader_Bot`
+- [x] Databento API key configurada en Railway
+- [x] Volume `/data` montado
+- [x] Variables de entorno
+- [x] Dominio público
+- [x] `/health` → **healthy** · worker READY · cuenta $10,000 · PAPER
 
-## Falta (bloquea el 24/7)
+## Links
 
-- [ ] Login en Railway: https://railway.app → **Login with GitHub** (`Facuvillegass`)
-- [ ] En esta Mac (opcional pero útil): `railway login` en Terminal
-- [ ] New Project → Deploy from GitHub → elegir `IQ_Trader_Bot`
-- [ ] Variables (pegar en Railway → Variables):
+- Dashboard: https://iqtraderbot-production.up.railway.app/
+- Health: https://iqtraderbot-production.up.railway.app/health
+- Status: https://iqtraderbot-production.up.railway.app/status
+- Project: https://railway.com/project/a97359fc-edaf-4acb-a434-b44fac6dbb62
 
-```
-TRADING_MODE=PAPER
-DATA_PROVIDER=databento
-DATABENTO_API_KEY=<tu key de Databento>
-DATA_API_KEY=<tu key de Databento>
-DATABASE_PATH=/data/trading.db
-LOG_DIR=/data/logs
-REPORTS_DIR=/data/reports
-TZ_DISPLAY=America/Argentina/Cordoba
-INITIAL_BALANCE=10000
-MNQ_QUANTITY=1
-SMA_PERIOD=4750
-BAND_POINTS=50
-SLIPPAGE_TICKS=1
-EMBED_WORKER=true
-```
+## Opcional / revisar en Databento
 
-- [ ] Volume: Settings → Volumes → Mount path **`/data`**
-- [ ] Generate Domain → abrir `/health` y confirmar `healthy`
-- [ ] Replicas = 1 (ya viene en `railway.json`)
+- [ ] Confirmar en el portal Databento que tenés acceso histórico `GLBX.MDP3` (ya funciona)
+- [ ] Si querés barras **en vivo** en sesión ETH (no solo histórico con lag), activá plan/live data en Databento y asegurate de la licencia personal CME
+- [ ] Por seguridad: la key se pegó en el chat → conviene **rotarla** en Databento y actualizar la variable en Railway
 
-## Seguridad
+## Nota de fin de semana
 
-La API key se pegó en el chat. Si el repo es público, **no** la subas al código. Si querés rotarla: Databento portal → regenerar key → actualizar Railway Variables.
+Hoy es sábado: el mercado MNQ está cerrado. La última barra histórica cargada es ~2026-08-05 20:59 ART. El engine está READY y esperará datos nuevos cuando el mercado abra (domingo ~18:00 ART / 17:00 CT) o cuando Databento publique más histórico.
